@@ -2,22 +2,26 @@ import React, { Component } from 'react';
 
 function ChatBar(props) {
     const currentUser = props.currentUser;
-
-    const onKeyPress = event => {
-
+    const onChatPress = event => {
         if (event.key === "Enter") {
             console.log(props);
-            props.submitFunc(event.target.value);
+            props.submitChat(event.target.value);
             event.target.value = "";
         }
-
     };
 
+   const onUserPress = event => {
+        if (event.key === "Enter") {
+            console.log(props);
+            props.updateUser(event.target.value);
+        }
+
+   }
 
     return (
         <footer className="chatbar">
-        <input defaultValue = {currentUser.name} className="chatbar-username" placeholder="Your Name (Optional)" />
-        <input className="chatbar-message" onKeyPress={onKeyPress} placeholder="Type a message and hit ENTER" />
+        <input defaultValue = {currentUser.name} onKeyPress={onUserPress}  className="chatbar-username" placeholder="Your Name (Optional)" />
+        <input className="chatbar-message" onKeyPress={onChatPress} placeholder="Type a message and hit ENTER" />
       </footer>
     );
 }
