@@ -9,35 +9,56 @@ class App extends Component {
         super(props);
         this.state = {
             currentUser: { name: "Anonymous" }, // optional. if currentUser is not defined, it means the user is Anonymous
-            messages: []
+            messages: [],
+            onlineUsers:0
         }
 
     }
 
 
     componentDidMount() {
-        this.socket = new WebSocket("ws://localhost:3001");
+        this.socket = new WebSocket("ws://172.46.0.229:3001");
         console.log("componentDidMount <App />");
         setTimeout(() => {
             console.log("Simulating incoming message")
         }, 3000);
 
         this.socket.onmessage = (msg) => {
-
             const parsedMessage = JSON.parse(msg.data);
-            console.log(parsedMessage);
-            const oldMessages = this.state.messages;
-            const newMessages = [...oldMessages, parsedMessage];
-            this.setState({ messages: newMessages });
-            console.log(this.socket);
 
+            if (parsedMessage.type === "incomingMessage") {
+
+                console.log(parsedMessage);
+                const oldMessages = this.state.messages;
+                const newMessages = [...oldMessages, parsedMessage];
+                this.setState({ messages: newMessages });
+
+            }
+
+            else if(parsedMessage.type === "incomingNotification"){
+                console.log(parsedMessage);
+                const oldMessages = this.state.messages;
+                const newMessages = [...oldMessages, parsedMessage];
+                this.setState({ messages: newMessages });
+
+            }
+
+            else if (parsedMessage.type === "onlineUsers"){
+                console.log(parsedMessage.content);
+                this.setState({ onlineUsers: parsedMessage.content });
+            }
+
+            else{
+                throw new Error("Unknown event type " + parsedMessage.type);
+            }
         }
     }
 
     //This function creates a new message and appends it to old messages and sets the State with setState function.
     submitChat = (str) => {
         const newMessage = {
-            username: "",
+            type: "postMessage",
+            username: this.state.currentUser.name,
             content: str
         }
 
@@ -48,17 +69,22 @@ class App extends Component {
     updateUser = (str) => {
         const newUser = { name: str }
 
-        this.setState({ currentUser: newUser });
+        const postNotification = {
+            type: "postNotification",
+            content: `${this.state.currentUser.name} has changed his name to ${str}`
+        }
 
-        // this.socket.send(JSON.stringify(currentUser));
+        this.setState({ currentUser: newUser });
+        this.socket.send(JSON.stringify(postNotification));
+
     }
 
     render() {
         return (
             <div>
-      <NavBar />
+      <NavBar onlineUsers = {this.state.onlineUsers} />
       <MessageList messages = {this.state.messages}/>
-      <ChatBar currentUser = {this.state.currentUser} submitChat = {this.submitFunc} updateUser = {this.updateUser}/>
+      <ChatBar currentUser = {this.state.currentUser} submitChat = {this.submitChat} updateUser = {this.updateUser}/>
       </div>
         );
 
