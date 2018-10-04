@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+//This is a ChatBar functional component
 function ChatBar(props) {
     const currentUser = props.currentUser;
     const onChatPress = event => {
@@ -10,6 +11,7 @@ function ChatBar(props) {
         }
     };
 
+//When the user changes the user name, this function handles it when Enter key is pressed.
    const onUserPress = event => {
         if (event.key === "Enter") {
             console.log(props);

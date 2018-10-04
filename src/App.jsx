@@ -15,7 +15,7 @@ class App extends Component {
 
     }
 
-
+    //Once the component is mounted, set up Web Socket and handle incoming messages from the server.
     componentDidMount() {
         this.socket = new WebSocket("ws://172.46.0.229:3001");
         console.log("componentDidMount <App />");
