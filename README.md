@@ -1,7 +1,7 @@
 ChattyApp
 =====================
 
-A minimal and light dev environment for ReactJS.
+A real-time ReactJS chat app built with Web Socket Server. 
 
 ### Usage
 
