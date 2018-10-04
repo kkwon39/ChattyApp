@@ -63,10 +63,10 @@ npm run lint
 )
 
 ### Final Product
-![HomeScreen](https://github.com/kkwon39/chattyapp/blob/master/docs/HomeScreen.png)
-![UserNameChange](https://github.com/kkwon39/chattyapp/blob/master/docs/UserNameChange.png)
-![UserChatting1](https://github.com/kkwon39/chattyapp/blob/master/docs/UserChatting1.png)
-![UserChatting2](https://github.com/kkwon39/chattyapp/blob/master/docs/UserChatting2.png)
-![CurrentlyOnlineUsers](https://github.com/kkwon39/chattyapp/blob/master/docs/Currently%20Online%20Users.png)
+![HomeScreen](https://github.com/kkwon39/chattyapp/blob/master/Docs/HomeScreen.png)
+![UserNameChange](https://github.com/kkwon39/chattyapp/blob/master/Docs/UserNameChange.png)
+![UserChatting1](https://github.com/kkwon39/chattyapp/blob/master/Docs/UserChatting1.png)
+![UserChatting2](https://github.com/kkwon39/chattyapp/blob/master/Docs/UserChatting2.png)
+![CurrentlyOnlineUsers](https://github.com/kkwon39/chattyapp/blob/master/Docs/Currently%20Online%20Users.png)
 
 
